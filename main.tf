@@ -33,6 +33,12 @@ resource "aws_instance" "blog" {
 
   vpc_security_group_ids = [aws_security_group.blog.id]
 
+  user_data = <<-EOF
+    #!/bin/bash
+    dnf install -y nginx
+    systemctl enable --now nginx
+  EOF
+
   tags = {
     Name = "HelloWorld"
   }
